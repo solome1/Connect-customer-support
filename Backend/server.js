@@ -38,15 +38,15 @@ app.get('/', (req, res) => {
 });
 
 // Company routes
-const companyRoutes = require('../nodejs-express/app/routes/company.routes.js');
+const companyRoutes = require('./app/routes/company.routes.js');
 app.use('/', companyRoutes);
 
 // Organization routes
-const organizationRoutes = require('../nodejs-express/app/routes/organization.routes.js');
+const organizationRoutes = require('./app/routes/organization.routes.js');
 app.use('/', organizationRoutes);
 
 
-const customerRoutes = require('../app/routes/customer.routes.js');
+const customerRoutes = require('./app/routes/customer.routes.js');
 app.use('/', customerRoutes);
 
 // Set port, listen for requests
