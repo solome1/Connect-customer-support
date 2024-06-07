@@ -4,15 +4,22 @@ const Company = db.company;
 // Create and save a new company
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.name || !req.body.address) {
-    return res.status(400).json({ message: 'Name and address are required.' });
+  if (!req.body.companyName) {
+    return res.status(400).json({ message: 'Company Name is  required.' });
   }
 
   // Create a Company object
   const company = new Company({
-    name: req.body.name,
-    address: req.body.address,
-    active: req.body.active ? req.body.active : false,
+    companyName: req.body.companyName,
+    companyEmail:req.body.companyEmail,
+    companyDescription:req.body.companyDescription,
+    companyLink:req.body.companyLink,
+    employeeCount:req.body.employeeCount,
+    companyWebsite:req.body.companyWebsite,
+    primaryContact:req.body.primaryContact,
+    country: req.body.country,
+    state: req.body.state,
+    city:req.body.city
   });
 
   // Save the Company object in the database
@@ -65,17 +72,13 @@ exports.getCompanyById = (req, res) => {
 exports.updateCompany = (req, res) => {
   const companyId = req.params.id;
 
-  if (!req.body.name || !req.body.address) {
-    return res.status(400).json({ message: 'Name and address are required.' });
+  if (!req.body.companyName) {
+    return res.status(400).json({ message: 'Company Name is required.' });
   }
 
   Company.findByIdAndUpdate(
     companyId,
-    {
-      name: req.body.name,
-      address: req.body.address,
-      active: req.body.active ? req.body.active : false,
-    },
+    req.body,
     { new: true }
   )
     .then((updatedCompany) => {
@@ -96,7 +99,7 @@ exports.updateCompany = (req, res) => {
 exports.deleteCompany = (req, res) => {
   const companyId = req.params.id;
 
-  Company.findByIdAndRemove(companyId)
+  Company.findByIdAndDelete(companyId)
     .then((deletedCompany) => {
       if (!deletedCompany) {
         return res.status(404).json({ message: 'Company not found.' });
