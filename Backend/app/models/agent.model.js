@@ -2,19 +2,24 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 
-const customerSchema = new mongoose.Schema({
-  customerName: {
+const agentSchema = new mongoose.Schema({
+  agentName: {
     type: String,
     required: true,
   },
-  customerEmail: {
+  agentEmail: {
     type: String,
-    unique: true
   },
-  contact: {
+  agentPhoneNumber: {
     type: String,
   },
   profileImage: {
+    type: String,
+  },
+  agentStatus: {
+    type: String,
+  },
+  companyId: {
     type: String,
   },
   password: {
@@ -24,8 +29,8 @@ const customerSchema = new mongoose.Schema({
         timestamps: true,
   });
 
-// customerSchema.methods.comparePassword = function (password) {
+// agentSchema.methods.comparePassword = function (password) {
 //   return bcrypt.compare(password, this.password);
 // };
 
-module.exports = mongoose.model('customer', customerSchema);
+module.exports = mongoose.model('agent', agentSchema);

@@ -49,6 +49,9 @@ app.use('/', organizationRoutes);
 const customerRoutes = require('./app/routes/customer.routes.js');
 app.use('/', customerRoutes);
 
+const agentRoutes = require('./app/routes/agent.routes.js');
+app.use('/', agentRoutes);
+
 // Set port, listen for requests
 const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
