@@ -9,6 +9,9 @@ module.exports = mongoose => {
       companyEmail: {
         type: String,
       },
+      password:{
+        type: String,  
+      },
       companyDescription: {
         type: String,
       },

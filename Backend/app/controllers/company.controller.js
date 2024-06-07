@@ -12,6 +12,7 @@ exports.create = (req, res) => {
   const company = new Company({
     companyName: req.body.companyName,
     companyEmail:req.body.companyEmail,
+    password:req.body.password,
     companyDescription:req.body.companyDescription,
     companyLink:req.body.companyLink,
     employeeCount:req.body.employeeCount,
