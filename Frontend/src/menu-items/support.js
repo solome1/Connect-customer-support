@@ -42,13 +42,7 @@ const support = {
       url: '/FAQPage',
       icon: icons.documentation
     },
-    {
-      id: 'sample-page',
-      title: 'Sample Page',
-      type: 'item',
-      url: '/sample-page',
-      icon: icons.samplePage
-    },
+    
     {
       id: 'customer',
       title: 'Customer',

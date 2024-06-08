@@ -13,8 +13,7 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 const AuthLogin = Loadable(lazy(() => import('pages/auth/login')));
 const AuthRegister = Loadable(lazy(() => import('pages/auth/register')));
 
-// render - sample page
-const SamplePage = Loadable(lazy(() => import('pages/sample-page')));
+
 
 //render-AgentPage.js
 const  Agent = Loadable(lazy(() => import('pages/Agent')));
