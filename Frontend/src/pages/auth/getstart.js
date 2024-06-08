@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import validator from 'validator';
+// import validator from 'validator';
+import { useLocation } from 'react-router-dom';
 
 import { KeyboardArrowLeft, KeyboardArrowRight, PhotoCamera } from '@mui/icons-material';
 import Logo from 'components/logo';
@@ -24,16 +25,20 @@ function GettingStartedPage({ user }) {
   const [step, setStep] = useState(0); // 0 for account information, 1 for invite agent
   const [profileImage, setProfileImage] = useState();
   const [companyName, setCompanyName] = useState(user?.companyName || ''); // Pre-fill from user data
-  const [companyPhoneNumber, setCompanyPhoneNumber] = useState(user?.companyPhoneNumber || '');
-  const [description, setDescription] = useState(''); 
+  const [companyDescription, setcompanyDescription] = useState(''); 
   const [employeeCount, setEmployeeCount] = useState('');
   const [companyWebsite, setCompanyWebsite] = useState('');
-  const [primaryContact, setPrimaryContact] = useState('');
+  const [primaryContact, setprimaryContact] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
-  const [street, setStreet] = useState('');
   const [country, setCountry] = useState('');
-  
+  const location = useLocation();
+  const companyId = location.state.companyId;
+
+  const apiUrl = 'http://localhost:8082/api/companies';
+
+
+
   const navigate = useNavigate();
 
   const handleNext = () => {
@@ -51,35 +56,32 @@ function GettingStartedPage({ user }) {
     }
   };
 
-  const validateEmail = (email) => {
-    return validator.isEmail(email);
-  };
+  // const validateEmail = (email) => {
+  //   return validator.isEmail(email);
+  // };
 
     const handleFinish = async () => {
       try {
         const formData = {
           companyName,
-          description,
+          companyDescription,
           employeeCount,
           companyWebsite,
           primaryContact,
-          companyPhoneNumber,
           country,
           state,
-          city,
-          street,
+          city
         };
-        const response = await fetch('/api/update-profile', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        if (data.message === 'Profile updated successfully') {
-          navigate('/'); // Navigate to the dashboard
-        } else {
-          console.error(data.message);
-        }
+          const response = await fetch(`${apiUrl}/${companyId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+          const data = await response.json();
+          console.log(data);
+          navigate('/Organization',{ state: { companyId:data._id } }); 
       } catch (error) {
         console.error(error);
       }
@@ -144,8 +146,8 @@ function GettingStartedPage({ user }) {
                 />     
                 <TextField
                   label="Description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  value={companyDescription}
+                  onChange={(e) => setcompanyDescription(e.target.value)}
                   fullWidth
                   multiline={false}
                   margin="normal"
@@ -191,9 +193,9 @@ function GettingStartedPage({ user }) {
                   margin="normal"
                 />
                 <TextField
-                  label="Phone Number"
-                  value={companyPhoneNumber}
-                  onChange={(e) => setCompanyPhoneNumber(e.target.value)}
+                  label="Primary Contact"
+                  value={primaryContact}
+                  onChange={(e) => setprimaryContact(e.target.value)}
                   fullWidth
                   multiline={false}
                   margin="normal"
