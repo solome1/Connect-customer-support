@@ -12,9 +12,16 @@ import { useNavigate } from 'react-router-dom';
 
 const AuthRegister = () => {
   const [level, setLevel] = useState();
+
+  // const [companyEmail, setCompanyEmail] = useState(""),
+  // const [companyName, setCompanyName] = useState(""),
+  // const [companyLink, setCompanyLink] = useState("")
+  // const [password, setpassword] = useState("")
   const [company, setCompany] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const apiUrl = 'http://localhost:8082/api/companies';
+
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -26,6 +33,35 @@ const AuthRegister = () => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  const handleSubmission = (values) => {
+    console.log(values)
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values)
+    })
+    .then(response => response.json())
+    .then(data =>
+      {
+        // console.log(data._id)
+        navigate('/getting-started', { state: { companyId:data._id } })
+      }
+    )
+    .catch(error => console.error(error));
+    // try {
+    //   // setStatus({ success: true });
+    //   // setSubmitting(false);
+      
+    // } catch (err) {
+    //   console.error(err);
+    //   // setStatus({ success: false });
+    //   // setErrors({ submit: err.message });
+    //   // setSubmitting(false);
+    // }
   };
 
   const changePassword = (value) => {
@@ -41,22 +77,20 @@ const AuthRegister = () => {
     <>
       <Formik
         initialValues={{
-          firstname: '',
-          lastname: '',
-          email: '',
-          company: '',
-          password: '',
-          phonenumber: '',
-          submit: null
+          companyEmail: '',
+          companyName: '',
+          companyLink: '',
+          password: ''
         }}
+
         validationSchema={Yup.object().shape({
-          firstname: Yup.string().max(255).required('First Name is required'),
-          lastname: Yup.string().max(255).required('Last Name is required'),
-          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+          companyLink: Yup.string().max(255).required('Company Link is required'),
+          companyName: Yup.string().max(255).required('Company Name is required'),
+          companyEmail: Yup.string().email('Must be a valid email').max(255).required('Company Email is required'),
           password: Yup.string().max(255).required('Password is required'),
-          phonenumber: Yup.string().max(15).required('Phone Number is required')
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+          console.log(values)
           try {
             setStatus({ success: true });
             setSubmitting(false);
@@ -80,8 +114,8 @@ const AuthRegister = () => {
                     error={Boolean(touched.email && errors.email)}
                     id="email-signup"
                     type="email"
-                    value={values.email}
-                    name="email"
+                    value={values.companyEmail}
+                    name="companyEmail"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="demo@company.com"
@@ -102,10 +136,10 @@ const AuthRegister = () => {
                     fullWidth
                     error={Boolean(touched.company && errors.company)}
                     id="company-signup"
-                    value={values.company}
-                    name="company"
+                    value={values.companyName}
+                    name="companyName"
                     onBlur={handleBlur}
-                    onChange={handleDomain}
+                    onChange={handleChange}
                     placeholder="Company name"
                     inputProps={{}}
                   />
@@ -122,7 +156,7 @@ const AuthRegister = () => {
                     id="domain-signup"
                     name="company"
                     label="Your vanity URL"
-                    value={company}
+                    value={values.companyName}
                     readOnly
                     InputProps={{
                       startAdornment: (
@@ -206,7 +240,7 @@ const AuthRegister = () => {
               )}
               <Grid item xs={12}>
                 <AnimateButton>
-                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                  <Button disableElevation onClick = {() => handleSubmission(values)} disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
                     Getting Started
                   </Button>
                 </AnimateButton>
