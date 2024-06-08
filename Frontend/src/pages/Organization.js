@@ -19,6 +19,9 @@ const Organization = () => {
               Company Name: <strong>{/* company name */}</strong>
             </Typography>
             <Typography variant="body1" gutterBottom>
+              Company Email: <strong>{/* company email */}</strong>
+            </Typography>
+            <Typography variant="body1" gutterBottom>
               Description: <strong>{/* company description */}</strong>
             </Typography>
             <Typography variant="body1" gutterBottom>
@@ -37,11 +40,9 @@ const Organization = () => {
               Company Website: <strong>{/* company website */}</strong>
             </Typography>
             <Typography variant="body1" gutterBottom>
-              Contact: <strong>{/* primary contact */}</strong>
+              Primary Contact: <strong>{/* primary contact */}</strong>
             </Typography>
-            <Typography variant="body1" gutterBottom>
-              Phone Number: <strong>{/* company phone number */}</strong>
-            </Typography>
+           
           </CardContent>
         </Card>
       </Grid>
@@ -60,9 +61,7 @@ const Organization = () => {
             <Typography variant="body1" gutterBottom>
               City: <strong>{/* city */}</strong>
             </Typography>
-            <Typography variant="body1" gutterBottom>
-              Street: <strong>{/* street */}</strong>
-            </Typography>
+            
           </CardContent>
         </Card>
       </Grid>

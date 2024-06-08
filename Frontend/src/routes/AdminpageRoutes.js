@@ -4,6 +4,9 @@ import { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'components/Loadable';
 
+//render-Dashboard
+const DashboardDefault = Loadable(lazy(() => import('pages/foradmin/dashboard')))
+
 //render-AgentPage.js
 const Agent = Loadable(lazy(() => import('pages/foradmin/Agent')));
 
@@ -19,33 +22,43 @@ const KnowledgeBaseComponent = Loadable(lazy(() => import('pages/foradmin/Knowle
 // render -Settings
 const Settings = Loadable(lazy(() => import('pages/foradmin/Settings')));
 
+//render- AddArticle
+const AddArticle = Loadable(lazy(() => import('pages/foradmin/AddArticle')));
 // ==============================|| COMPONENTS ROUTES ||============================== //
 
-const AdminpageRoutes = {
+const AdminPageRoutes = {
     path: '/foradmin',
     element: <MainLayout />,
     children: [
         {
-            path: 'agent',
+            path: 'Dashboard',
+            element: <DashboardDefault/>
+        },
+        {
+            path: 'Agent',
             element: <Agent />
         },
         {
-            path: 'articleEditor',
+            path: 'ArticleEditor',
             element: <ArticleEditor />
         },
         {
-            path: 'articleList',
+            path: 'ArticleList',
             element: <ArticleList />
         },
         {
-            path: 'knowledgeBaseComponent',
+            path: 'KnowledgeBaseComponent',
             element: <KnowledgeBaseComponent />
         },
         {
-            path: 'settings',
+            path: 'Settings',
             element: <Settings />
+        },
+        {
+            path: 'AddArticle',
+            element: <AddArticle />
         }
     ]
 };
 
-export default AdminpageRoutes;
+export default AdminPageRoutes;

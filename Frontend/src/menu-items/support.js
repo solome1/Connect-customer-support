@@ -1,7 +1,6 @@
 // assets
 import { DocumentCode2, I24Support } from 'iconsax-react';
 
-
 // icons
 const icons = {
   samplePage: DocumentCode2,
@@ -12,61 +11,31 @@ const icons = {
 
 const support = {
   id: 'other',
-  title: 'Others',
+  title: 'For System Admin',
   type: 'group',
   children: [
     {
-      id: 'Organization',
-      title: 'Organization',
+      id: 'organizationprofile',
+      title: 'OrganizationProfile',
       type: 'item',
-      url: '/Organization'
-    },
-    {
-      id: 'customer',
-      title: 'Customer',
-      type: 'item',
-      url: '/customer',
+      url: '/OrganizationProfile',
       icon: icons.samplePage
     },
     {
-      id: 'Organization2',
-      title: 'Organization2',
+      id: 'setting',
+      title: 'Setting',
       type: 'item',
-      url: '/Organization2',
+      url: '/Setting',
       icon: icons.documentation
     },
     {
-      id: ' OrganizationSettings',
-      title: 'OrganizationSettings',
+      id: ' organizationlist',
+      title: 'OrganizationList',
       type: 'item',
-      url: '/OrganizationSettings',
+      url: '/OrganizationList',
       icon: icons.documentation
     },
-
-    {
-      id: 'AddArticle',
-      title: 'AddArticle',
-      type: 'item',
-      url: '/AddArticle',
-      icon: icons.samplePage
-    },
-    {
-      id: 'ChatCallManagement',
-      title: 'ChatCallManagement',
-      type: 'item',
-      url: '/chatmanagement',
-      icon: icons.samplePage
-    },
-
-    {
-      id: 'documentation',
-      title: 'Documentation',
-      type: 'item',
-      url: 'https://phoenixcoded.gitbook.io/able-pro/v/react/',
-      icon: icons.documentation,
-      external: true,
-      target: true
-    }
+    
   ]
 };
 

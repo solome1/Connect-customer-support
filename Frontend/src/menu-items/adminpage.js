@@ -1,15 +1,16 @@
 // type
-import { Home3, Text, Colorfilter, Barcode } from 'iconsax-react';
+import { Home3, Text, Colorfilter, Barcode, HomeTrendUp  } from 'iconsax-react';
 
 // icons
 const icons = {
     navigation: Home3,
     typography: Text,
     color: Colorfilter,
-    shadow: Barcode
+    shadow: Barcode,
+    dashboard: HomeTrendUp
 };
 
-// ==============================|| MENU ITEMS - COMPONENTS ||============================== //
+// ==============================|| MENU ITEMS - ADMINPAGE ||============================== //
 
 const adminpage = {
     id: 'adminpage',
@@ -17,41 +18,55 @@ const adminpage = {
     icon: icons.navigation,
     type: 'group',
     children: [
-
         {
+            id: 'dashboard',
+            title: 'Dashboard',
+            type: 'item',
+            url: '/Dashboard',
+            icon: icons.dashboard,
+            breadcrumbs: false
+          },
+          {
             id: 'agentpage',
             title: 'Agent',
             type: 'item',
-            url: '/foradmin/Agent',
-            icon: icons.typography
+            url: '/Agent',
+            icon: icons. dashboard
         },
         {
             id: 'articleditor',
             title: 'ArticleEditor',
             type: 'item',
-            url: '/foradmin/ArticleEditor',
+            url: '/ArticleEditor',
             icon: icons.color
         },
         {
             id: 'articlelist',
             title: 'ArticleList',
             type: 'item',
-            url: '/foradmin/ArticleList',
+            url: '/ArticleList',
             icon: icons.shadow
         },
         {
             id: 'knowledgebasecomponent',
             title: 'KnowledgeBaseComponent',
             type: 'item',
-            url: '/foradmin/KnowledgeBaseComponent',
+            url: '/KnowledgeBaseComponent',
             icon: icons.shadow
         },
         {
             id: 'settings',
             title: 'Settings',
             type: 'item',
-            url: '/foradmin/Settings',
+            url: '/Settings',
             icon: icons.shadow
         },
+        {
+            id: 'addarticle',
+            title: 'AddArticle',
+            type: 'item',
+            url: '/AddArticle',
+            icon: icons.color
+          },
     ]};
     export default adminpage;

@@ -6,18 +6,15 @@ import CommonLayout from 'layout/CommonLayout';
 import Loadable from 'components/Loadable';
 import GettingStartedPage from 'pages/auth/getstart';
 
-// render - dashboard
-const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
+// // render - dashboard
+// const DashboardDefault = Loadable(lazy(() => import('pages/foradmin/dashboard')));
 
 // pages routing
 const AuthLogin = Loadable(lazy(() => import('pages/auth/login')));
 const AuthRegister = Loadable(lazy(() => import('pages/auth/register')));
 
-//render - CustomerComponent
-const CustomerComponent = Loadable(lazy(() => import('pages/customer')));
-
 //render - ChatCallManagement
-const ChatCallManagement = Loadable(lazy(() => import('pages/chatmanagement')))
+const ChatCallManagement = Loadable(lazy(() => import('pages/foragent/chatmanagement')))
 
 //render - AddEditArticle
 const AddArticle = Loadable(lazy(() => import('pages/AddArticle.js')));
@@ -39,10 +36,10 @@ const MainRoutes = {
       path: '/',
       element: <MainLayout />,
       children: [
-        {
-          path: '/',
-          element: <DashboardDefault />
-        },
+        // {
+        //   path: '/',
+        //   element: <DashboardDefault />
+        // },
         {
           path: 'getting-started', // Added route for GettingStartedPage
           element: <GettingStartedPage />
@@ -50,15 +47,6 @@ const MainRoutes = {
         {
           path: 'Organization',
           element: <Organization/>
-        },
-        {
-          path: 'dashboard',
-          element: <DashboardDefault />
-        },
-
-        {
-          path: 'customer',
-          element: <CustomerComponent />
         },
         {
           path: 'AddArticle',
