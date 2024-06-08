@@ -22,47 +22,11 @@ const support = {
       url: '/Organization'
     },
     {
-      id: 'agentpage',
-      title: 'Agent',
-      type: 'item',
-      url: '/Agent',
-      icon: icons.documentation
-    },
-    {
-      id: 'homepage',
-      title: 'Homepage',
-      type: 'item',
-      url: '/homepage',
-      icon: icons.documentation
-    },
-    {
-      id: 'FAQPage',
-      title: 'FAQPage',
-      type: 'item',
-      url: '/FAQPage',
-      icon: icons.documentation
-    },
-    
-    {
       id: 'customer',
       title: 'Customer',
       type: 'item',
       url: '/customer',
       icon: icons.samplePage
-    },
-    {
-      id: 'CustomerProfile',
-      title: 'CustomerProfile',
-      type: 'item',
-      url: '/CustomerProfile',
-      icon: icons.samplePage
-    },
-    {
-      id: 'AgentProfile',
-      title: 'AgentProfile',
-      type: 'item',
-      url: '/AgentProfile',
-      icon: icons.documentation
     },
     {
       id: 'Organization2',
@@ -71,7 +35,6 @@ const support = {
       url: '/Organization2',
       icon: icons.documentation
     },
-
     {
       id: ' OrganizationSettings',
       title: 'OrganizationSettings',
@@ -80,13 +43,6 @@ const support = {
       icon: icons.documentation
     },
 
-    {
-      id: 'knowledgebase',
-      title: 'Knowledgebase',
-      type: 'item',
-      url: '/knowledgebase',
-      icon: icons.samplePage
-    },
     {
       id: 'AddArticle',
       title: 'AddArticle',

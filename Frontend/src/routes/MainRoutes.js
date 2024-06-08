@@ -13,34 +13,14 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 const AuthLogin = Loadable(lazy(() => import('pages/auth/login')));
 const AuthRegister = Loadable(lazy(() => import('pages/auth/register')));
 
-
-
-//render-AgentPage.js
-const  Agent = Loadable(lazy(() => import('pages/Agent')));
-
 //render - CustomerComponent
 const CustomerComponent = Loadable(lazy(() => import('pages/customer')));
-
-//rende - KnowledgeBaseManagementComponent
-const CMSComponent = Loadable(lazy(() => import('pages/knowledgebase')));
 
 //render - ChatCallManagement
 const ChatCallManagement = Loadable(lazy(() => import('pages/chatmanagement')))
 
 //render - AddEditArticle
 const AddArticle = Loadable(lazy(() => import('pages/AddArticle.js')));
-
-//render -homepage
-const HomePage  = Loadable(lazy(() => import('pages/homepage.js')));
-
-//render-FAQPage
-const FAQPage = Loadable(lazy(() => import('pages/FAQPage')));
-
-//render-CustomerProfile
-const CustomerProfile = Loadable(lazy(() => import('pages/CustomerProfile')));
-
-//render-AgentProfile
-const AgentProfile = Loadable(lazy(() => import('pages/AgentProfile')));
 
 // render -OrganizationComponent
 const CustomerSupportDashboard = Loadable(lazy(() => import('pages/Organization2')));
@@ -72,40 +52,13 @@ const MainRoutes = {
           element: <Organization/>
         },
         {
-          path: 'Agent',
-          element: < Agent/>
-        },
-        {
-          path: 'homepage',
-          element: <HomePage />
-        },
-        {
-          path: 'FAQPage',
-          element: <FAQPage/>
-        },
-        {
           path: 'dashboard',
           element: <DashboardDefault />
         },
-        {
-          path: 'sample-page',
-          element: <SamplePage />
-        },
+
         {
           path: 'customer',
           element: <CustomerComponent />
-        },
-        {
-          path: 'AgentProfile',
-          element: <AgentProfile/>
-        },
-        {
-          path: 'CustomerProfile',
-          element: <CustomerProfile/>
-        },
-        {
-          path: 'knowledgebase',
-          element: <CMSComponent />
         },
         {
           path: 'AddArticle',
@@ -123,8 +76,6 @@ const MainRoutes = {
           path: 'OrganizationSettings',
           element: <OrganizationSettings/>
         },
-
-
       ]
     },
     {
