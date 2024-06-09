@@ -2,7 +2,7 @@
   "name": "able-pro-react-free-admin-dashboard",
   "version": "1.2.0",
   "private": true,
-  "homepage": "https://ableproadmin.com/react/free",
+  "homepage": "https://ableproadmin.com/",
   "dependencies": {
     "@date-io/date-fns": "^3.0.0",
     "@emotion/cache": "^11.11.0",

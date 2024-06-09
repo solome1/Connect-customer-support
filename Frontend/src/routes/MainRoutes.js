@@ -13,20 +13,14 @@ import GettingStartedPage from 'pages/auth/getstart';
 const AuthLogin = Loadable(lazy(() => import('pages/auth/login')));
 const AuthRegister = Loadable(lazy(() => import('pages/auth/register')));
 
-//render - ChatCallManagement
-const ChatCallManagement = Loadable(lazy(() => import('pages/foragent/chatmanagement')))
-
-//render - AddEditArticle
-const AddArticle = Loadable(lazy(() => import('pages/AddArticle.js')));
-
 // render -OrganizationComponent
-const CustomerSupportDashboard = Loadable(lazy(() => import('pages/Organization2')));
+const Setting = Loadable(lazy(() => import('pages/Organization2')));
 
 //render-OrganizationSettings
-const OrganizationSettings = Loadable(lazy(() => import('pages/OrganizationSettings')));
+const OrganizationList = Loadable(lazy(() => import('pages/OrganizationSettings')));
 
 //render-OrganizationComponent1
-const Organization= Loadable(lazy(() => import('pages/Organization')));
+const OrganizationProfile= Loadable(lazy(() => import('pages/Organization')));
 // ==============================|| MAIN ROUTES ||============================== //
 
 const MainRoutes = {
@@ -45,24 +39,16 @@ const MainRoutes = {
           element: <GettingStartedPage />
         },
         {
-          path: 'Organization',
-          element: <Organization/>
+          path: 'OrganizationProfile',
+          element: <OrganizationProfile/>
         },
         {
-          path: 'AddArticle',
-          element: <AddArticle />
+          path: 'Setting',
+          element: <Setting/>
         },
         {
-          path: 'chatmanagement',
-          element: <ChatCallManagement />
-        },
-        {
-          path: 'Organization2',
-          element: <CustomerSupportDashboard/>
-        },
-        {
-          path: 'OrganizationSettings',
-          element: <OrganizationSettings/>
+          path: 'OrganizationList',
+          element: <OrganizationList/>
         },
       ]
     },

@@ -17,7 +17,6 @@ import {
   Checkbox,
   Modal,
   Box,
-  Typography,
   Link
 } from '@mui/material';
 
@@ -25,7 +24,7 @@ const OrganizationSettings = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [organizations, setOrganizations] = useState([
     // dummy data
-    { id: 1, name: 'ABC Corp', domain: 'abc.com', dateCreated: new Date().toISOString() },
+    { id: 1, name: 'ABC Corp',email: 'sesdss@gmail.com', domain: 'abc.com', dateCreated: new Date().toISOString() },
     { id: 2, name: 'EF Inc', domain: 'ef.com', dateCreated: new Date().toISOString() },
     { id: 3, name: 'GHI Ltd', domain: 'ghi.com', dateCreated: new Date().toISOString() },
     //...
@@ -34,19 +33,12 @@ const OrganizationSettings = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedOrganizations, setSelectedOrganizations] = useState({});
   const [openModal, setOpenModal] = useState(false);
-  const [newOrganization, setNewOrganization] = useState({ name: '', domain: '' });
+ 
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleCreateOrganization = () => {
-    setOpenModal(true);
-  };
-
-  const handleEditOrganization = (organizationId) => {
-    // implement edit organization logic
-  };
 
   const handleDeleteOrganization = (organizationId) => {
     setOrganizations((prevOrganizations) =>
@@ -103,19 +95,14 @@ const OrganizationSettings = () => {
     setOpenModal(false);
   };
 
-  const handleModalSubmit = () => {
-    const newOrg = {...newOrganization, id: Math.max(...organizations.map((org) => org.id)) + 1, dateCreated: new Date().toISOString() };
-    setOrganizations((prevOrganizations) => [...prevOrganizations, newOrg]);
-    setOpenModal(false);
-  };
+
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
       </Grid>
       <Grid item xs={12}>
-        <Card>
-          <CardContent>
+        
             <Grid container spacing={2}>
               <Grid item xs={8}>
                 <TextField
@@ -135,18 +122,7 @@ const OrganizationSettings = () => {
                   }}
                 />
               </Grid>
-              <Grid item xs={4}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleCreateOrganization}
-                >
-                  Create Organization
-                </Button>
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
+          </Grid> 
       </Grid>
 
       <Grid item xs={12}>
@@ -170,6 +146,7 @@ const OrganizationSettings = () => {
                     />
                   </TableCell>
                   <TableCell>Name</TableCell>
+                  <TableCell>Email</TableCell>
                   <TableCell>Domain</TableCell>
                   <TableCell>Date Created</TableCell>
                   <TableCell>Actions</TableCell>
@@ -194,16 +171,18 @@ const OrganizationSettings = () => {
                         {organization.name}
                       </Link>
                       </TableCell>
+                      <TableCell> 
+                      <Link
+                        href={`/Organization/${organization.id}`}
+                        underline="none"
+                      >
+                        {organization.email}
+                      </Link>
+                      </TableCell>
                     <TableCell>{organization.domain}</TableCell>
                     <TableCell>{new Date(organization.dateCreated).toLocaleDateString()}</TableCell>
                     <TableCell>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleEditOrganization(organization.id)}
-                      >
-                        Edit
-                      </Button>
+
                       <Button
                         variant="contained"
                         color="secondary"
@@ -261,38 +240,7 @@ const OrganizationSettings = () => {
             p: 4,
           }}
         >
-          <Typography id="modal-title" variant="h6" component="h2">
-            Create Organization
-          </Typography>
-          <Typography id="modal-description" sx={{ mt: 2 }}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Name"
-              value={newOrganization.name}
-              onChange={(event) =>
-                setNewOrganization({ ...newOrganization, name: event.target.value })
-              }
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Domain"
-              value={newOrganization.domain}
-              onChange={(event) =>
-                setNewOrganization({ ...newOrganization, domain: event.target.value })
-              }
-              sx={{ mb: 2 }}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleModalSubmit}
-            >
-              Create
-            </Button>
-          </Typography>
+
         </Box>
       </Modal>
     </Grid >

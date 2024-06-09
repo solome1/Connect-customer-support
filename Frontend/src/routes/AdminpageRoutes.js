@@ -5,7 +5,7 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'components/Loadable';
 
 //render-Dashboard
-const DashboardDefault = Loadable(lazy(() => import('pages/foradmin/dashboard')))
+const  DashboardDefault = Loadable(lazy(() => import('pages/foradmin/dashboard')))
 
 //render-AgentPage.js
 const Agent = Loadable(lazy(() => import('pages/foradmin/Agent')));
@@ -27,12 +27,12 @@ const AddArticle = Loadable(lazy(() => import('pages/foradmin/AddArticle')));
 // ==============================|| COMPONENTS ROUTES ||============================== //
 
 const AdminPageRoutes = {
-    path: '/foradmin',
+    path: '/',
     element: <MainLayout />,
     children: [
         {
-            path: 'Dashboard',
-            element: <DashboardDefault/>
+            path: '/Dashboard',
+            element: < DashboardDefault/>
         },
         {
             path: 'Agent',

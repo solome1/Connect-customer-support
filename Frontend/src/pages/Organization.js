@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Button, Card, CardContent, CardActions } from '@mui/material';
+import { Grid, Typography, Button, Card, CardContent } from '@mui/material';
 
 const Organization = () => {
   return (
