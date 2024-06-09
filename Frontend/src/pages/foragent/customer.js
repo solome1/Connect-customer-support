@@ -3,7 +3,7 @@ import {
   Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Button, TextField, Avatar,
   TablePagination, Modal, Fade, Backdrop, Tooltip, IconButton, Divider
 } from '@mui/material';
-import { ArrowUpward, ArrowDownward, PhotoCamera, Edit as EditIcon, Delete as DeleteIcon, Chat as ChatIcon } from '@mui/icons-material';
+import { ArrowUpward, ArrowDownward, PhotoCamera, Edit as EditIcon, Chat as ChatIcon } from '@mui/icons-material';
 
 const style = {
   position: 'absolute',
@@ -216,7 +216,7 @@ const CustomerComponent = () => {
             {selectedCustomer ? (
               <>
                 <Typography variant="h6" component="h2" gutterBottom>
-                  {selectedCustomer.name}'s Profile
+                  {selectedCustomer.name}&apos;s Profile
                 </Typography>
                 <Box display="flex" flexDirection="column" gap={2}>
                   <Avatar src={selectedCustomer.profileImage} alt={selectedCustomer.name} style={{ width: 100, height: 100, alignSelf: 'center' }} />
@@ -315,7 +315,7 @@ const CustomerComponent = () => {
             {selectedCustomer && (
               <>
                 <Typography variant="h6" component="h2" gutterBottom>
-                  {selectedCustomer.name}'s Profile
+                  {selectedCustomer.name}&apos;s Profile
                 </Typography>
                 <Box display="flex" flexDirection="column" gap={2}>
                   <Avatar src={selectedCustomer.profileImage} alt={selectedCustomer.name} style={{ width: 100, height: 100, alignSelf: 'center' }} />

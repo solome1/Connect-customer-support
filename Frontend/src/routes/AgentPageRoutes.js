@@ -10,6 +10,8 @@ const  Customer = Loadable(lazy(() => import('pages/foragent/customer')))
 //render-AgentPage.js
 const ChatCallManagement = Loadable(lazy(() => import('pages/foragent/chatmanagement')));
 
+//render-Conversation
+const Conversation = Loadable(lazy(() => import('pages/Conversation/ConversationInterface')))
 const AgentPageRoutes = {
     path: '/',
     element: <MainLayout />,
@@ -22,6 +24,10 @@ const AgentPageRoutes = {
             path: 'ChatCallManagement ',
             element: <ChatCallManagement  />
         },
+        {
+            path: 'Conversation',
+            element: <Conversation/>
+        }
     ]
 };
 export default AgentPageRoutes;

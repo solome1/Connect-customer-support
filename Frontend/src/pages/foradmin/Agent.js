@@ -38,6 +38,8 @@ const Agent = () => {
   const [selectedAgent, setSelectedAgent] = useState(null); // New state for selected agent
   const [filteredAgents, setFilteredAgents] = useState([]);
   const [editableAgent, setEditableAgent] = useState(null);
+  const [openProfile, setOpenProfile] = useState(false);
+
 
   useEffect(() => {
     const sorted = [...agents].sort((a, b) => {
@@ -128,22 +130,31 @@ const Agent = () => {
     setAgents(updatedAgents);
   };
 
+  const handleOpenProfile = (agents) => {
+    setSelectedAgent(agents);
+    setOpenProfile(true);
+  };
+
+  const handleCloseProfile = () => {
+    setOpenProfile(false);
+  };
+
   const visibleAgents = filteredAgents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <Box>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
         <Box>
-        <TextField
-          placeholder="Search agents"
-          variant="outlined"
-          size="small"
-          value={searchTerm}
-          onChange={handleSearch}
-          style={{ flexGrow: 1, marginRight: '16px' }}
-        />
+          <TextField
+            placeholder="Search agents"
+            variant="outlined"
+            size="small"
+            value={searchTerm}
+            onChange={handleSearch}
+            style={{ flexGrow: 1, marginRight: '16px' }}
+          />
         </Box>
-        
+
         <Button variant="contained" onClick={handleOpenModal} style={{ marginLeft: 16 }}>
           Add Agent
         </Button>
@@ -156,7 +167,7 @@ const Agent = () => {
               <TableCell onClick={() => handleSort('name')}>
                 <Box display="flex" alignItems="center">
                   Name
-                  { sortColumn === 'name' && (
+                  {sortColumn === 'name' && (
                     <Tooltip title={sortDirection === 'asc' ? 'Sort descending' : 'Sort ascending'}>
                       <IconButton size="small">
                         {sortDirection === 'asc' ? <ArrowUpward /> : <ArrowDownward />}
@@ -168,7 +179,7 @@ const Agent = () => {
               <TableCell onClick={() => handleSort('email')}>
                 <Box display="flex" alignItems="center">
                   Email
-                  { sortColumn === 'email' && (
+                  {sortColumn === 'email' && (
                     <Tooltip title={sortDirection === 'asc' ? 'Sort descending' : 'Sort ascending'}>
                       <IconButton size="small">
                         {sortDirection === 'asc' ? <ArrowUpward /> : <ArrowDownward />}
@@ -184,7 +195,7 @@ const Agent = () => {
           </TableHead>
           <TableBody>
             {visibleAgents.map((agent) => (
-              <TableRow key={agent.id} style={{ cursor: 'pointer' }}>
+              <TableRow key={agent.id} onClick={() => handleOpenProfile(agent)} style={{ cursor: 'pointer' }}>
                 <TableCell>
                   <Avatar src={agent.profileImage} alt={agent.name} />
                 </TableCell>
@@ -197,7 +208,7 @@ const Agent = () => {
                   </Typography>
                 </TableCell>
                 <TableCell>
-                  <Button variant="contained" color="primary" onClick={() => handleEdit(agent)}>
+                  <Button variant="contained" color="primary" onClick={(e) => { e.stopPropagation(); handleEdit(agent); }}>
                     Edit
                   </Button>
                   <Button
@@ -231,7 +242,7 @@ const Agent = () => {
       >
         <Fade in={open}>
           <Box sx={style}>
-            { selectedAgent ? (
+            {selectedAgent ? (
               <>
                 <Typography variant="h6" component="h2" gutterBottom>
                   {selectedAgent.name}&apos;s Profile
@@ -241,7 +252,6 @@ const Agent = () => {
                   <Typography><strong>Name:</strong> {selectedAgent.name}</Typography>
                   <Typography><strong>Email:</strong> {selectedAgent.email}</Typography>
                   <Typography><strong>Contact:</strong> {selectedAgent.contact}</Typography>
-                  <Typography><strong>Status:</strong> {selectedAgent.status}</Typography>
                   <Typography variant="body2" color="textSecondary" align="right">
                     Created: {selectedAgent.createdDate}<br />
                     Updated: {selectedAgent.updatedDate}
@@ -260,16 +270,22 @@ const Agent = () => {
             ) : (
               <>
                 <Typography variant="h6" component="h2" gutterBottom>
-                  { editableAgent ? `Edit Agent: ${editableAgent.name}` : 'Create Agent'}
+                  {editableAgent ? 'Edit Agent' : 'Add Agent'}
                 </Typography>
                 <Box display="flex" flexDirection="column" gap={2}>
-                <Box display="flex" alignItems="center" gap={2}>
-                    <Avatar src={editableAgent ? editableAgent.profileImage : newAgent.profileImage} alt="Profile Picture" />
-                    <Button variant="contained" component="label" startIcon={<PhotoCamera />}>
-                      Upload
-                      <input type="file" hidden accept="image/*" onChange={handleProfilePictureChange} />
-                    </Button>
-                  </Box>
+                  <input
+                    accept="image/*"
+                    id="profile-image-upload"
+                    type="file"
+                    style={{ display: 'none' }}
+                    onChange={handleProfilePictureChange}
+                  />
+                  <label htmlFor="profile-image-upload">
+                    <IconButton color="primary" component="span">
+                      <PhotoCamera />
+                    </IconButton>
+                  </label>
+                  <Avatar src={editableAgent ? editableAgent.profileImage : newAgent.profileImage} alt="Profile Image" />
                   <TextField
                     label="Name"
                     variant="outlined"
@@ -297,26 +313,53 @@ const Agent = () => {
                       setEditableAgent({ ...editableAgent, contact: e.target.value }) :
                       setNewAgent({ ...newAgent, contact: e.target.value })}
                   />
-
-                  {editableAgent && (
-                    <Typography variant="body2" color="textSecondary" align="right" style={{ marginTop: 'auto' }}>
-                      Created: {editableAgent.createdDate}<br />
-                      Updated: {editableAgent.updatedDate}
-                    </Typography>
-                  )}
+                  <Typography variant="body2" color="textSecondary" align="right">
+                    Created: {editableAgent ? editableAgent.createdDate : newAgent.createdDate}<br />
+                    Updated: {editableAgent ? editableAgent.updatedDate : newAgent.updatedDate}
+                  </Typography>
                   <Divider />
                   <Box display="flex" justifyContent="flex-end" gap={2}>
-                    {editableAgent ? (
-                      <Button variant="contained" color="primary" onClick={handleUpdateAgent}>
-                        Update
-                      </Button>
-                    ) : (
-                      <Button variant="contained" color="primary" onClick={handleCreateAgent}>
-                        Create
-                      </Button>
-                    )}
+                    <Button variant="contained" color="primary" onClick={editableAgent ? handleUpdateAgent : handleCreateAgent}>
+                      {editableAgent ? 'Update' : 'Create'}
+                    </Button>
                     <Button variant="outlined" color="secondary" onClick={handleCloseModal}>
                       Cancel
+                    </Button>
+                  </Box>
+                </Box>
+              </>
+            )}
+          </Box>
+        </Fade>
+      </Modal>
+      <Modal
+        open={openProfile}
+        onClose={handleCloseProfile}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{ timeout: 500 }}
+      >
+        <Fade in={openProfile}>
+          <Box sx={style}>
+            {selectedAgent && (
+              <>
+                <Typography variant="h6" component="h2" gutterBottom>
+                  {selectedAgent.name}'s Profile
+                </Typography>
+                <Box display="flex" flexDirection="column" gap={2}>
+                  <Avatar src={selectedAgent.profileImage} alt={selectedAgent.name} style={{ width: 100, height: 100, alignSelf: 'center' }} />
+                  <Typography><strong>Name:</strong> {selectedAgent.name}</Typography>
+                  <Typography><strong>Email:</strong> {selectedAgent.email}</Typography>
+                  <Typography><strong>Contact:</strong> {selectedAgent.contact}</Typography>
+                  <Typography><strong>Status:</strong> {selectedAgent.status}</Typography>
+                  <Typography variant="body2" color="textSecondary" align="right">
+                    Created: {selectedAgent.createdDate}<br />
+                    Updated: {selectedAgent.updatedDate}
+                  </Typography>
+                  <Divider />
+                  <Box display="flex" justifyContent="flex-end" gap={2}>
+                    <Button variant="outlined" color="secondary" onClick={handleCloseProfile}>
+                      Close
                     </Button>
                   </Box>
                 </Box>

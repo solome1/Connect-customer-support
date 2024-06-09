@@ -33,6 +33,14 @@ const foragent = {
       icon: icons.color,
       breadcrumbs: false
     },
+    {
+      id: 'conversation',
+      title: 'Conversation',
+      type: 'item',
+      url: '/Conversation',
+      icon: icons.color,
+      breadcrumbs: false
+    },
   ]
 };
 

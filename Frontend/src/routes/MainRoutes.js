@@ -17,10 +17,10 @@ const AuthRegister = Loadable(lazy(() => import('pages/auth/register')));
 const Setting = Loadable(lazy(() => import('pages/Organization2')));
 
 //render-OrganizationSettings
-const OrganizationList = Loadable(lazy(() => import('pages/OrganizationSettings')));
+const OrganizationList = Loadable(lazy(() => import('pages/OrganizationList')));
 
 //render-OrganizationComponent1
-const OrganizationProfile= Loadable(lazy(() => import('pages/Organization')));
+const OrganizationProfile= Loadable(lazy(() => import('pages/OrganizationProfile')));
 // ==============================|| MAIN ROUTES ||============================== //
 
 const MainRoutes = {
