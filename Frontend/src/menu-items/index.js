@@ -1,5 +1,4 @@
 // project-imports
-import foragentpage from './foragentpage';
 import support from './support';
 import pages from './pages';
 import adminpage from './adminpage';
@@ -7,7 +6,7 @@ import adminpage from './adminpage';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [pages, support, adminpage, foragentpage, ]
+  items: [ adminpage, pages, support, ]
 };
 
 export default menuItems;

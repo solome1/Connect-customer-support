@@ -1,4 +1,5 @@
 const Agent = require('../models/agent.model');
+const {sendRegistrationEmail} = require("../middlewares/sendEmailRegistration")
 
 
 // Create and save a new agent
@@ -14,15 +15,18 @@ exports.create = (req, res) => {
         companyId: req.body.companyId,
         agentEmail: req.body.agentEmail,
         password: req.body.password,
-        agentStatus: req.body.agentStatus,
+        agentStatus: true,
         agentPhoneNumber: req.body.agentPhoneNumber,
         profileImage: req.body.profileImage,
     });
+
+    
 
     // Save the Company object in the database
     agent.save(agent)
         .then((data) => {
             res.status(201).json(data);
+            sendRegistrationEmail(agent.agentEmail, agent.password)
         })
         .catch((error) => {
             res.status(500).json({
@@ -45,6 +49,21 @@ exports.getAllAgents = (req, res) => {
             });
         });
 };
+
+
+// Retrieve all agents
+exports.getAll = (req, res) => {
+    Agent.find()
+        .then((agents) => {
+            res.status(200).json(agents);
+        })
+        .catch((error) => {
+            res.status(500).json({
+                message: error.message || 'Some error occurred while retrieving agents.',
+            });
+        });
+};
+
 
 
 

@@ -46,6 +46,10 @@ const organizationRoutes = require('./app/routes/organization.routes.js');
 app.use('/', organizationRoutes);
 
 
+//article routes
+const articleRoutes = require('./app/routes/article.routes.js');
+app.use('/', articleRoutes);
+
 const customerRoutes = require('./app/routes/customer.routes.js');
 app.use('/', customerRoutes);
 

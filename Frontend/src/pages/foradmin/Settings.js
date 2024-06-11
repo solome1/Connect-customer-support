@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Typography, TextField, Select, MenuItem, Button } from '@mui/material';
+import { Grid, Typography, TextField, Select, MenuItem, Button, Paper, Container } from '@mui/material';
 
 const Settings = () => {
   const [colors, setColors] = useState({
@@ -62,139 +62,173 @@ const Settings = () => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Typography variant="h5">Settings</Typography>
-      </Grid>
-      <Grid item xs={6}>
-        <Typography variant="body1">Appearance</Typography>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Paper elevation={2} sx={{ p: 4 }}>
+        <Typography variant="h5" sx={{ mb: 2 }}>
+          Knowledge Base Settings
+        </Typography>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <TextField
-              label="Primary Color"
-              value={colors.primary}
-              onChange={handleColorChange}
-              name="primary"
-              fullWidth
-            />
+            <Typography variant="h3" sx={{ mb: 2 }}>
+              Appearance
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  label="Primary Color"
+                  value={colors.primary}
+                  onChange={handleColorChange}
+                  name="primary"
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Secondary Color"
+                  value={colors.secondary}
+                  onChange={handleColorChange}
+                  name="secondary"
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Select
+                  label="Header Theme"
+                  value={headerTheme}
+                  onChange={handleHeaderThemeChange}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                >
+                  <MenuItem value="light">Light</MenuItem>
+                  <MenuItem value="dark">Dark</MenuItem>
+                </Select>
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Primary Button Text"
+                  value={primaryButtonText}
+                  onChange={handlePrimaryButtonTextChange}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={6}>
-            <TextField
-              label="Secondary Color"
-              value={colors.secondary}
-              onChange={handleColorChange}
-              name="secondary"
-              fullWidth
-            />
+            <Typography variant="body1" sx={{ mb: 2 }}>
+              Branding
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  label="Logo"
+                  value={logo}
+                  onChange={handleLogoChange}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Favicon"
+                  value={favicon}
+                  onChange={handleFaviconChange}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Hero Image"
+                  value={heroImage}
+                  onChange={handleHeroImageChange}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Custom Font"
+                  value={customFont}
+                  onChange={handleCustomFontChange}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={6}>
-            <Select
-              label="Header Theme"
-              value={headerTheme}
-              onChange={handleHeaderThemeChange}
-              fullWidth
-            >
-              <MenuItem value="light">Light</MenuItem>
-              <MenuItem value="dark">Dark</MenuItem>
-            </Select>
+            <Typography variant="body1" sx={{ mb: 2 }}>
+              Content
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  label="Knowledge Base Name"
+                  value={knowledgeBaseName}
+                  onChange={handleKnowledgeBaseNameChange}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Header"
+                  value={header}
+                  onChange={handleHeaderChange}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Footer"
+                  value={footer}
+                  onChange={handleFooterChange}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Select
+                  label="Languages"
+                  value={languages}
+                  onChange={handleLanguageChange}
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  multiple
+                  renderValue={(selected) => selected.join(', ')}
+                >
+                  <MenuItem value="en">English</MenuItem>
+                  <MenuItem value="fr">French</MenuItem>
+                  <MenuItem value="es">Spanish</MenuItem>
+                  <MenuItem value="de">German</MenuItem>
+                </Select>
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Primary Button Text"
-              value={primaryButtonText}
-              onChange={handlePrimaryButtonTextChange}
-              fullWidth
-            />
+          <Grid item xs={12}>
+            <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+              Save Changes
+            </Button>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={6}>
-        <Typography variant="body1">Branding</Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField
-              label="Logo"
-              value={logo}
-              onChange={handleLogoChange}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Favicon"
-              value={favicon}
-              onChange={handleFaviconChange}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Hero Image"
-              value={heroImage}
-              onChange={handleHeroImageChange}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Custom Font"
-              value={customFont}
-              onChange={handleCustomFontChange}
-              fullWidth
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item xs={6}>
-        <Typography variant="body1">Content</Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField
-              label="Knowledge Base Name"
-              value={knowledgeBaseName}
-              onChange={handleKnowledgeBaseNameChange}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-             label="Header"
-              value={header}
-              onChange={handleHeaderChange}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Footer"
-              value={footer}
-              onChange={handleFooterChange}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Select
-              label="Languages"
-              value={languages}
-              onChange={handleLanguageChange}
-              fullWidth
-              multiple
-              renderValue={(selected) => selected.join(', ')}
-            >
-              <MenuItem value="en">English</MenuItem>
-              <MenuItem value="fr">French</MenuItem>
-              <MenuItem value="es">Spanish</MenuItem>
-              <MenuItem value="de">German</MenuItem>
-            </Select>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Button variant="contained" color="primary" fullWidth>
-          Save Changes
-        </Button>
-      </Grid>
-    </Grid>
+      </Paper>
+    </Container>
   );
 };
 

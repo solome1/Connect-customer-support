@@ -14,6 +14,10 @@ router.post('/api/agents',  agents.create);
 // Retrieve all agents
 router.get('/api/agents/all/:id', agents.getAllAgents);
 
+
+// Retrieve all agents
+router.get('/api/agents/', agents.getAll);
+
 // Retrieve a specific agent by ID
 router.get('/api/agents/:id',  agents.getAgentById);
 

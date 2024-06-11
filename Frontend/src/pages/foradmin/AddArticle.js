@@ -8,20 +8,30 @@ import {
   IconButton,
   TextField,
   Tooltip,
+  Grid,
   Typography,
-  Drawer, 
-  List, 
-  ListItem, 
-  ListItemText
+  MenuItem,
+  Select,
 } from '@mui/material';
 import { Delete as DeleteIcon } from '@mui/icons-material';
-import Textarea from '@mui/material/TextareaAutosize';
+
 
 const AddArticle = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-//   const [keywords, setKeywords] = useState([]);
+  const [status, setStatus] = useState('draft');
+
+
+
+  const handleContentChange = (event) => {
+    setContent(event.target.value);
+  };
+
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value);
+  };
+
 
   const onTitleChange = (e) => {
     setTitle(e.target.value);
@@ -30,13 +40,6 @@ const AddArticle = () => {
   const onEditorStateChange = (state) => {
     setEditorState(state);
   };
-
-//   const addKeyword = (e) => {
-//     if (e.key === 'Enter') {
-//       setKeywords([...keywords, e.target.value.trim()]);
-//       e.target.value = '';
-//     }
-//   };
 
   const handlePreview = () => {
     // Logic to preview the article
@@ -48,104 +51,116 @@ const AddArticle = () => {
     const rawContentState = convertToRaw(contentState);
     console.log('Article content:', rawContentState);
     console.log('Article title:', title);
-    console.log('Article keywords:', keywords);
   };
 
   return (
-    <Box
-      sx={{
-        p: 4,
-        bgcolor: 'background.paper',
-        boxShadow: 4,
-        borderRadius: 2,
-      }}
-    >
+    <Box>
       <Box
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          mb: 4,
+          mb: 2,
         }}
-      >
-        {/* Sidebar */}
-      <Drawer variant="permanent" anchor="left">
-        <List>
-          <ListItem button>
-            <ListItemText primary="Content" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Settings" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Publish" />
-          </ListItem>
-        </List>
-      </Drawer>
 
-        <Typography variant="h5">Edit Article</Typography>
+      >
         <Box>
+
+          <Grid container spacing={2}>
+
+            <Grid item xs={12}>
+              <Typography variant="body1">Status:</Typography>
+              <Select value={status} onChange={handleStatusChange}>
+                <MenuItem value="draft">Draft</MenuItem>
+                <MenuItem value="published">Published</MenuItem>
+                <MenuItem value="published-with-pending-changes">
+                  Published with pending changes
+                </MenuItem>
+              </Select>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box
+          variant="contained"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+            marginLeft: 16
+          }}
+        >
           <Tooltip title="Delete">
             <IconButton>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
           <Button variant="contained" onClick={handlePreview}>
-            Preview Changes
+            Preview
           </Button>
           <Button variant="contained" color="primary" onClick={handlePublish}>
             Publish
           </Button>
         </Box>
       </Box>
-      <TextField
-        fullWidth
-        label="Add a title"
-        variant="outlined"
-        value={title}
-        onChange={onTitleChange}
-        sx={{ mb: 4 }}
-      />
-        
-      <Textarea
-      fullWidth
-      variant="outlined"
-      value={content}
-      onChange={(e) => setContent(e.target.value)}
-      placeholder="Enter the article content"
-      style={{ width: '100%', minHeight: '200px' }}
-      />
-      <Editor
-        editorState={editorState}
-        onEditorStateChange={onEditorStateChange}
-        toolbarClassName="formatting-toolbar"
-        wrapperClassName="content-editor"
-        editorClassName="editor-content"
-        toolbar={{
-          options: [
-            'inline',
-            'blockType',
-            'fontFamily',
-            'fontSize',
-            'list',
-            'textAlign',
-            'colorPicker',
-            'link',
-            'embedded',
-            'emoji',
-            'image',
-            'remove',
-            'history',
-          ],
+
+      <Box
+        sx={{
+          p: 4,
+          bgcolor: 'background.paper',
+          boxShadow: 4,
+          borderRadius: 2,
         }}
-        // sx={{ mb: 4 }}
-      />
-      {/* <TextField
-        fullWidth
-        label="Add keywords (press Enter to add)"
-        variant="outlined"
-        onKeyPress={addKeyword}
-      /> */}
+      >
+
+        <TextField
+          fullWidth
+          label="Add a title"
+          variant="outlined"
+          value={title}
+          onChange={onTitleChange}
+          sx={{ mb: 4 }}
+        />
+        {/* 
+        <Textarea
+          onChange={(e) => setContent(e.target.value)}
+        /> */}
+
+        <TextField
+          label="Add article Content"
+          value={content}
+          onChange={handleContentChange}
+          variant="outlined"
+          fullWidth
+          multiline
+          rows={10}
+        />
+
+        <Editor
+          editorState={editorState}
+          onEditorStateChange={onEditorStateChange}
+          toolbarClassName="formatting-toolbar"
+          wrapperClassName="content-editor"
+          editorClassName="editor-content"
+          toolbar={{
+            options: [
+              'inline',
+              'blockType',
+              'fontFamily',
+              'fontSize',
+              'list',
+              'textAlign',
+              'colorPicker',
+              'link',
+              'embedded',
+              'emoji',
+              'image',
+              'remove',
+              'history',
+            ],
+          }}
+
+        />
+      </Box>
     </Box>
   );
 };

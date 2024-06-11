@@ -25,7 +25,7 @@ function GettingStartedPage({ user }) {
   const [step, setStep] = useState(0); // 0 for account information, 1 for invite agent
   const [profileImage, setProfileImage] = useState();
   const [companyName, setCompanyName] = useState(user?.companyName || ''); // Pre-fill from user data
-  const [companyDescription, setcompanyDescription] = useState(''); 
+  const [companyDescription, setcompanyDescription] = useState('');
   const [employeeCount, setEmployeeCount] = useState('');
   const [companyWebsite, setCompanyWebsite] = useState('');
   const [primaryContact, setprimaryContact] = useState('');
@@ -60,31 +60,31 @@ function GettingStartedPage({ user }) {
   //   return validator.isEmail(email);
   // };
 
-    const handleFinish = async () => {
-      try {
-        const formData = {
-          companyName,
-          companyDescription,
-          employeeCount,
-          companyWebsite,
-          primaryContact,
-          country,
-          state,
-          city
-        };
-          const response = await fetch(`${apiUrl}/${companyId}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-          });
-          const data = await response.json();
-          console.log(data);
-          navigate('/Organization',{ state: { companyId:data._id } }); 
-      } catch (error) {
-        console.error(error);
-      }
+  const handleFinish = async () => {
+    try {
+      const formData = {
+        companyName,
+        companyDescription,
+        employeeCount,
+        companyWebsite,
+        primaryContact,
+        country,
+        state,
+        city
+      };
+      const response = await fetch(`${apiUrl}/${companyId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      const data = await response.json();
+      console.log(data);
+      navigate('/dashboard', { state: { companyId: data._id } });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -143,7 +143,7 @@ function GettingStartedPage({ user }) {
                   fullWidth
                   multiline={false}
                   margin="normal"
-                />     
+                />
                 <TextField
                   label="Description"
                   value={companyDescription}
@@ -205,7 +205,7 @@ function GettingStartedPage({ user }) {
                 <IconButton color="primary" onClick={handleBack}>
                   <KeyboardArrowLeft />
                 </IconButton>
-                
+
                 <div style={{ marginLeft: 'auto' }}>
                   <IconButton color="primary" onClick={handleNext}>
                     <KeyboardArrowRight />

@@ -17,7 +17,7 @@ const agentSchema = new mongoose.Schema({
     type: String,
   },
   agentStatus: {
-    type: String,
+    type: Boolean,
   },
   companyId: {
     type: String,

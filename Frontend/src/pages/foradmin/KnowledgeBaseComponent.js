@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Grid, Typography, Button, TextField, Select, MenuItem } from '@mui/material';
-import  ArticleList  from './ArticleList';
-import ArticleEditor  from './ArticleEditor';
-import  Settings  from './Settings';
+import { Container, Grid, Button, } from '@mui/material';
+import ArticleList from './ArticleList';
+// import ArticleEditor  from './ArticleEditor';
+import Settings from './Settings';
 
 const KnowledgeBaseComponent = () => {
   const [articles, setArticles] = useState([]);
@@ -17,6 +17,7 @@ const KnowledgeBaseComponent = () => {
     headerTheme: 'light',
     primaryButtonText: 'Get Started',
   });
+  const [activeTab, setActiveTab] = useState('content');
 
   useEffect(() => {
     // Fetch articles from API or database
@@ -37,35 +38,46 @@ const KnowledgeBaseComponent = () => {
   };
 
   const handleSettingsChange = (key, value) => {
-    setSettings((prevSettings) => ({...prevSettings, [key]: value }));
+    setSettings((prevSettings) => ({ ...prevSettings, [key]: value }));
   };
 
   const filteredArticles = articles.filter((article) =>
     article.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const handleContent = (key, value) => {
+
+  }
+
   return (
     <Container maxWidth="lg">
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={4} md={3}>
-          <Typography variant="h5">Knowledge Base</Typography>
-          <TextField
-            label="Search"
-            value={searchQuery}
-            onChange={handleSearch}
-            fullWidth
-          />
-          <ArticleList articles={filteredArticles} onSelect={handleArticleSelect} />
+        <Grid item xs={12} sm={4} md={3}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+
+          }}>
+          <Button variant="contained" color="secondary" style={{ marginleft: '8px' }} onClick={() => handleTabChange('content')} >
+            Content
+          </Button>
+
+          <Button variant="contained" color="secondary" style={{ marginleft: '8px' }} onClick={() => handleTabChange('settings')} >
+            Settings
+          </Button>
+
         </Grid>
-        <Grid item xs={12} sm={8} md={9}>
-          {selectedArticle? (
-            <ArticleEditor article={selectedArticle} />
+        <Grid item xs={12} sm={8} md={12}>
+          {activeTab === 'content' ? (
+            <ArticleList articles={filteredArticles} onSelect={handleArticleSelect} />
           ) : (
-            <Typography variant="h5">Select an article to edit</Typography>
+            <Settings settings={settings} onChange={handleSettingsChange} />
           )}
-        </Grid>
-        <Grid item xs={12}>
-          <Settings settings={settings} onChange={handleSettingsChange} />
         </Grid>
       </Grid>
     </Container>

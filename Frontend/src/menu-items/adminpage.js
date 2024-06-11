@@ -32,42 +32,50 @@ const adminpage = {
       type: 'item',
       url: '/Agent',
       icon: icons.dashboard
-  },
-  {
+    },
+    {
+      id: 'customer',
+      title: 'Customer',
+      type: 'item',
+      url: '/customer',
+      icon: icons.typography,
+      breadcrumbs: false
+    },
+    {
       id: 'articleditor',
       title: 'ArticleEditor',
       type: 'item',
       url: '/ArticleEditor',
       icon: icons.color
-  },
-  {
+    },
+    {
       id: 'articlelist',
       title: 'ArticleList',
       type: 'item',
       url: '/ArticleList',
       icon: icons.shadow
-  },
-  {
+    },
+    {
       id: 'knowledgebasecomponent',
       title: 'KnowledgeBaseComponent',
       type: 'item',
-      url: '/KnowledgeBaseComponent',
+      url: '/KnowledgeBase',
       icon: icons.shadow
-  },
-  {
+    },
+    {
       id: 'settings',
       title: 'Settings',
       type: 'item',
       url: '/Settings',
       icon: icons.shadow
-  },
-  {
+    },
+    {
       id: 'addarticle',
       title: 'AddArticle',
       type: 'item',
       url: '/AddArticle',
       icon: icons.color
-  },
+    },
 
   ]
 };

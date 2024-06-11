@@ -4,10 +4,10 @@ import { useRoutes } from 'react-router-dom';
 
 import MainRoutes from './MainRoutes';
 import AdminPageRoutes from './AdminpageRoutes';
-import AgentPageRoutes from './AgentPageRoutes';
+
 
 // ==============================|| ROUTES RENDER ||============================== //
 
 export default function ThemeRoutes() {
-  return useRoutes([MainRoutes, AdminPageRoutes, AgentPageRoutes]);
+  return useRoutes([MainRoutes, AdminPageRoutes]);
 }

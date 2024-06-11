@@ -24,6 +24,10 @@ const Settings = Loadable(lazy(() => import('pages/foradmin/Settings')));
 
 //render- AddArticle
 const AddArticle = Loadable(lazy(() => import('pages/foradmin/AddArticle')));
+
+//render-Customer
+const  Customer = Loadable(lazy(() => import('pages/foradmin/customer')))
+
 // ==============================|| COMPONENTS ROUTES ||============================== //
 
 const AdminPageRoutes = {
@@ -31,12 +35,16 @@ const AdminPageRoutes = {
     element: <MainLayout />,
     children: [
         {
-            path: '/Dashboard',
+            path: '/dashboard',
             element: < DashboardDefault/>
         },
         {
             path: 'Agent',
             element: <Agent />
+        },
+        {
+            path: '/Customer',
+            element: < Customer/>
         },
         {
             path: 'ArticleEditor',
@@ -47,7 +55,7 @@ const AdminPageRoutes = {
             element: <ArticleList />
         },
         {
-            path: 'KnowledgeBaseComponent',
+            path: 'KnowledgeBase',
             element: <KnowledgeBaseComponent />
         },
         {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Grid, Stack, Typography } from '@mui/material';
 
 // project-imports
-import Logo from 'components/logo';
+//import Logo from 'components/logo';
 import AuthDivider from 'sections/auth/AuthDivider';
 import AuthWrapper from 'sections/auth/AuthWrapper';
 import FirebaseRegister from 'sections/auth/auth-forms/AuthRegister';
@@ -18,7 +18,7 @@ const Register = () => {
     <AuthWrapper>
       <Grid container spacing={3}>
         <Grid item xs={12} sx={{ textAlign: 'center' }}>
-          <Logo />
+         
         </Grid>
         <Grid item xs={12}>
           <AuthDivider>

@@ -19,15 +19,18 @@ const style = {
 
 const Agent = () => {
   const [agents, setAgents] = useState([]);
+  
+
+
   const [newAgent, setNewAgent] = useState({
     id: '',
-    name: '',
-    email: '',
-    contact: '',
-    status: 'active',
     profileImage: '',
-    createdDate: '',
-    updatedDate: ''
+    agentName: '',
+    agentEmail: '',
+    agentPhoneNumber: '',
+    status: 'active',
+    // createdDate: new Date().toLocaleString(),
+    // updatedDate: ''
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [sortColumn, setSortColumn] = useState('name');
@@ -39,17 +42,55 @@ const Agent = () => {
   const [filteredAgents, setFilteredAgents] = useState([]);
   const [editableAgent, setEditableAgent] = useState(null);
   const [openProfile, setOpenProfile] = useState(false);
+  // useEffect(() => {
+    
+  // }, []);
 
+  const postNewAgent = async () => {
+    console.log("POSTIIING")
+    try {
+      const response = await fetch('http://localhost:8082/api/agents', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newAgent)
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(data);
+      handleCloseModal()
+      // You can also update the state or perform other actions after posting the data
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
+    const fetchData = async () => {
+      // setLoading(true);
+      try {
+        const response = await fetch('http://localhost:8082/api/agents');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setAgents(data);
+      } catch (error) {
+        // setError(error.message);
+      } 
+    };
+    fetchData()
     const sorted = [...agents].sort((a, b) => {
       if (a[sortColumn] < b[sortColumn]) return sortDirection === 'asc' ? -1 : 1;
       if (a[sortColumn] > b[sortColumn]) return sortDirection === 'asc' ? 1 : -1;
       return 0;
     });
     const filtered = sorted.filter((agent) =>
-      agent.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      agent.email.toLowerCase().includes(searchTerm.toLowerCase())
+      agent.agentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      agent.agentEmail.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredAgents(filtered);
   }, [agents, sortColumn, sortDirection, searchTerm]);
@@ -67,9 +108,9 @@ const Agent = () => {
     setNewAgent({
       id: '',
       profileImage: '',
-      name: '',
-      email: '',
-      contact: '',
+      agentName: '',
+      agentEmail: '',
+      agentPhoneNumber: '',
       status: 'active',
       createdDate: new Date().toLocaleString(),
       updatedDate: ''
@@ -81,10 +122,12 @@ const Agent = () => {
     setOpen(false);
     setSelectedAgent(null);
     setEditableAgent(null);
+    setNewAgent(null);
   };
 
   const handleCreateAgent = () => {
     const updatedAgent = { ...newAgent, id: Date.now().toString(), updatedDate: new Date().toLocaleString() };
+    console.log(updatedAgent)
     setAgents([...agents, updatedAgent]);
     setOpen(false);
   };
@@ -199,9 +242,9 @@ const Agent = () => {
                 <TableCell>
                   <Avatar src={agent.profileImage} alt={agent.name} />
                 </TableCell>
-                <TableCell>{agent.name}</TableCell>
-                <TableCell>{agent.email}</TableCell>
-                <TableCell>{agent.contact}</TableCell>
+                <TableCell>{agent.agentName}</TableCell>
+                <TableCell>{agent.agentEmail}</TableCell>
+                <TableCell>{agent.agentPhoneNumber}</TableCell>
                 <TableCell>
                   <Typography color={agent.status === 'active' ? 'success.main' : 'error.main'}>
                     {agent.status}
@@ -249,9 +292,9 @@ const Agent = () => {
                 </Typography>
                 <Box display="flex" flexDirection="column" gap={2}>
                   <Avatar src={selectedAgent.profileImage} alt={selectedAgent.name} style={{ width: 100, height: 100, alignSelf: 'center' }} />
-                  <Typography><strong>Name:</strong> {selectedAgent.name}</Typography>
-                  <Typography><strong>Email:</strong> {selectedAgent.email}</Typography>
-                  <Typography><strong>Contact:</strong> {selectedAgent.contact}</Typography>
+                  <Typography><strong>Name:</strong> {selectedAgent.AgentName}</Typography>
+                  <Typography><strong>Email:</strong> {selectedAgent.AgentEmail}</Typography>
+                  <Typography><strong>Contact:</strong> {selectedAgent.agentPhoneNumber}</Typography>
                   <Typography variant="body2" color="textSecondary" align="right">
                     Created: {selectedAgent.createdDate}<br />
                     Updated: {selectedAgent.updatedDate}
@@ -290,28 +333,28 @@ const Agent = () => {
                     label="Name"
                     variant="outlined"
                     size="small"
-                    value={editableAgent ? editableAgent.name : newAgent.name}
+                    value={editableAgent ? editableAgent.name : newAgent.agentName}
                     onChange={(e) => editableAgent ?
                       setEditableAgent({ ...editableAgent, name: e.target.value }) :
-                      setNewAgent({ ...newAgent, name: e.target.value })}
+                      setNewAgent({ ...newAgent, agentName: e.target.value })}
                   />
                   <TextField
                     label="Email"
                     variant="outlined"
                     size="small"
-                    value={editableAgent ? editableAgent.email : newAgent.email}
+                    value={editableAgent ? editableAgent.email : newAgent.agentEmail}
                     onChange={(e) => editableAgent ?
                       setEditableAgent({ ...editableAgent, email: e.target.value }) :
-                      setNewAgent({ ...newAgent, email: e.target.value })}
+                      setNewAgent({ ...newAgent, agentEmail: e.target.value })}
                   />
                   <TextField
                     label="Contact"
                     variant="outlined"
                     size="small"
-                    value={editableAgent ? editableAgent.contact : newAgent.contact}
+                    value={editableAgent ? editableAgent.contact : newAgent.agentPhoneNumber}
                     onChange={(e) => editableAgent ?
                       setEditableAgent({ ...editableAgent, contact: e.target.value }) :
-                      setNewAgent({ ...newAgent, contact: e.target.value })}
+                      setNewAgent({ ...newAgent, agentPhoneNumber: e.target.value })}
                   />
                   <Typography variant="body2" color="textSecondary" align="right">
                     Created: {editableAgent ? editableAgent.createdDate : newAgent.createdDate}<br />
@@ -319,7 +362,7 @@ const Agent = () => {
                   </Typography>
                   <Divider />
                   <Box display="flex" justifyContent="flex-end" gap={2}>
-                    <Button variant="contained" color="primary" onClick={editableAgent ? handleUpdateAgent : handleCreateAgent}>
+                    <Button variant="contained" color="primary" onClick={editableAgent ? handleUpdateAgent : postNewAgent}>
                       {editableAgent ? 'Update' : 'Create'}
                     </Button>
                     <Button variant="outlined" color="secondary" onClick={handleCloseModal}>

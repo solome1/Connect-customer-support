@@ -61,44 +61,21 @@ const Organization = () => {
   };
 
   const handleSubmit = async () => {
-    //   try {
-    //     const response = await fetch(`http://localhost:8082/api/companies/123`, { // Replace with actual ID
-    //       method: 'PUT',
-    //       headers: { 'Content-Type': 'application/json' },
-    //       body: JSON.stringify(organization),
-    //     });
-    //     if (!response.ok) {
-    //       throw new Error(`HTTP error! status: ${response.status}`);
-    //     }
-    //     const data = await response.json();
-    //     setOrganization(data);
-    //     setOpen(false);
-    //   } catch (error) {
-    //     console.error('Error updating organization:', error);
-    //     setError(error.message);
-    //   }
+ 
   };
 
-  // if (loading) {
-  //   return <Typography>Loading...</Typography>;
-  // }
 
-  // if (error) {
-  //   return <Typography color="error">Error: {error}</Typography>;
-  // }
 
   return (
     <>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Typography variant="h4" gutterBottom>
-            Organization Details
-          </Typography>
+
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h4" gutterBottom>
                 Company Information
               </Typography>
               <Typography variant="body1" gutterBottom>
@@ -119,7 +96,7 @@ const Organization = () => {
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h4" gutterBottom>
                 Contact Information
               </Typography>
               <Typography variant="body1" gutterBottom>
@@ -131,10 +108,10 @@ const Organization = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h5" gutterBottom>
                 Address Information
               </Typography>
               <Typography variant="body1" gutterBottom>

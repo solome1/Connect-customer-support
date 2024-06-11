@@ -15,20 +15,6 @@ const support = {
   type: 'group',
   children: [
     {
-      id: 'organizationprofile',
-      title: 'OrganizationProfile',
-      type: 'item',
-      url: '/OrganizationProfile',
-      icon: icons.samplePage
-    },
-    {
-      id: 'setting',
-      title: 'Setting',
-      type: 'item',
-      url: '/Setting',
-      icon: icons.documentation
-    },
-    {
       id: ' organizationlist',
       title: 'OrganizationList',
       type: 'item',
